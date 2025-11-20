@@ -18,6 +18,9 @@ private:
     int *coordenadasY;
     bool direcionado;
 
+    void liberarMatrizDeAdjacencias(){} // Libera a memória alocada para a matriz de adjacências
+    bool isVerticeValido(int u){} // Verifica se o vértice é válido
+
 public:
         Grafo() {} // Construtor vazio
         ~Grafo() {} // Destrutor

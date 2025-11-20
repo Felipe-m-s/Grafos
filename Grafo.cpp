@@ -5,6 +5,39 @@
 
 using namespace std;
 
+// todo Implementação dos métodos da classe Grafo
+//* Metodos auxiliares
+void Grafo::liberarMatrizDeAdjacencias()
+{
+    if (matrizDeAdjacencias != nullptr)
+    {
+        for (int i = 0; i < numDeVertices; ++i)
+        {
+            delete[] matrizDeAdjacencias[i];
+        }
+        delete[] matrizDeAdjacencias;
+        matrizDeAdjacencias = nullptr;
+    }
+
+    delete[] coordenadasX;
+    coordenadasX = nullptr;
+
+    delete[] coordenadasY;
+    coordenadasY = nullptr;
+}
+
+bool Grafo::isVerticeValido(int u)
+{
+    return (u >= 0 && u < numDeVertices);
+}
+
+//* Construtor e Destrutor
+Grafo::Grafo() : numDeVertices(0), numDeArestas(0), direcionado(false) {} // Construtor vazio
+Grafo::~Grafo()
+{
+    liberarMatrizDeAdjacencias();
+} // Destrutor
+
 void Grafo::importar()
 {
     ifstream arq("grafo.txt");
@@ -16,8 +49,6 @@ void Grafo::importar()
     arq >> direcionado;
     arq >> numDeVertices;
 }
-
-Grafo::Grafo() : numDeVertices(0), numDeArestas(0), direcionado(false) {} // Construtor vazio
 
 void Grafo::criarVazio(int numDeVertices_param, bool Direcionado)
 {
