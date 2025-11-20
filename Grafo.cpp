@@ -1,80 +1,112 @@
+#include "Grafo.hpp"
 #include <iostream>
 #include <fstream>
+#include <string>
 
 using namespace std;
 
-class Grafo
+void Grafo::importar()
 {
-
-private:
-    int numDeVertices;
-    int numDeArestas;
-    int **matrizDeAdjacencias;
-    int *coordenadasX;
-    int *coordenadasY;
-    bool direcionado;
-
-public:
-    void importar()
+    ifstream arq("grafo.txt");
+    if (!arq.is_open())
     {
-        ifstream arq("grafo.txt");
-        if (!arq.is_open())
+        cout << "Erro ao abrir o arquivo!" << endl;
+        return;
+    }
+    arq >> direcionado;
+    arq >> numDeVertices;
+}
+
+Grafo::Grafo() : numDeVertices(0), numDeArestas(0), direcionado(false) {} // Construtor vazio
+
+void Grafo::criarVazio(int numDeVertices_param, bool Direcionado)
+{
+    if (numDeVertices_param <= 0)
+    {
+        cout << "Numero de vertices invalido!" << endl;
+        return;
+    }
+
+    this->numDeVertices = numDeVertices_param;
+    this->direcionado = Direcionado;
+    this->matrizDeAdjacencias = new int *[numDeVertices];
+    for (int i = 0; i < numDeVertices; ++i)
+    {
+        // Aloca cada linha e inicializa com zeros
+        this->matrizDeAdjacencias[i] = new int[numDeVertices]{0};
+    }
+    this->coordenadasX = new int[numDeVertices]{0};
+    this->coordenadasY = new int[numDeVertices]{0};
+}
+void Grafo::exibirTodasAsAdjacencias()
+{
+    if (numDeVertices == 0 || matrizDeAdjacencias == nullptr)
+    {
+        cout << "Grafo vazio ou nao inicializado!" << endl;
+        return;
+    }
+    for (int i = 0; i < numDeVertices; i++)
+    {
+        cout << "Vertice " << i << ": ";
+        for (int j = 0; j < numDeVertices; j++)
         {
-            cout << "Erro ao abrir o arquivo!" << endl;
-            return;
+            cout << matrizDeAdjacencias[i][j] << " ";
         }
-        arq >> direcionado;
-        arq >> numDeVertices;
+        cout << endl;
+    }
+}
+
+bool consultarSeAdjacente(int u, int v)
+{
+}
+
+void Grafo::inserAresta(int u, int v, int p)
+{
+    if (u < 0 || u >= numDeVertices || v < 0 || v >= numDeVertices || p <= 0)
+    {
+        cout << "Parametros invalidos para inserir aresta!" << endl;
+        return;
     }
 
-public:
-    Grafo() : numDeVertices(0), numDeArestas(0), direcionado(false) {} // Construtor vazio
-
-    void criarVaio(int NumVertices, bool Direcionado)
+    if (matrizDeAdjacencias[u][v] == 0)
     {
-        this->numDeVertices = NumVertices;
-        this->direcionado = Direcionado;
-        this->matrizDeAdjacencias[numDeVertices][numDeVertices] = {0};
-        this->coordenadasX[numDeVertices] = {0};
-        this->coordenadasY[numDeVertices] = {0};
-    }
-    void exibirTodasAsAdjacencias()
-    {
+        numDeArestas++;
     }
 
-    bool consultarSeAdjacente(int u, int v)
+    matrizDeAdjacencias[u][v] = p;
+
+    if (!direcionado)
     {
+        matrizDeAdjacencias[v][u] = p;
     }
 
-    void inserAresta(int u, int v, int p)
-    {
-    }
+    cout << "Aresta inserida entre " << u << " e " << v << " com peso " << p << "." << endl;
+}
 
-    void removerAresta(int u, int v)
-    {
-    }
+void removerAresta(int u, int v)
+{
+}
 
-    void editarCoordenadaDoVertice(int u, int x, int y)
-    {
-    }
+void editarCoordenadaDoVertice(int u, int x, int y)
+{
+}
 
-    int primeiroAdjacenteDoVertice(int u)
-    {
-    }
+int primeiroAdjacenteDoVertice(int u)
+{
+}
 
-    int proximoAdjacenteDoVertice(int u, int atual)
-    {
-    }
+int proximoAdjacenteDoVertice(int u, int atual)
+{
+}
 
-    void listaCompletaDeAdjacentesDoVertice(int u)
-    {
-    }
+void listaCompletaDeAdjacentesDoVertice(int u)
+{
+}
 
-    void exportar()
-    {
-    }
+void exportar()
+{
+}
 
-    void mostrarGraficamente()
-    {
-    }
-};
+void mostrarGraficamente()
+{
+}
