@@ -306,7 +306,7 @@ void Grafo::exportar()
     cout << "Grafo exportado com sucesso para Grafo_Exportado.txt" << endl;
 }
 
-void Grafo::mostrarJson()
+void Grafo::exportarArquivoJson()
 {
     ofstream arq("Grafo.json");
     if (!arq.is_open())
