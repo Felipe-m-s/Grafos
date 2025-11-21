@@ -148,6 +148,12 @@ void Grafo::exibirTodasAsAdjacencias()
 
 bool Grafo::consultarSeAdjacente(int u, int v)
 {
+    if (!isVerticeValido(u) || !isVerticeValido(v))
+    {
+        cout << "Vertices invalidos!" << endl;
+        return false;
+    }
+    return matrizDeAdjacencias[u][v] != 0;
 }
 
 void Grafo::inserAresta(int u, int v, int p)
