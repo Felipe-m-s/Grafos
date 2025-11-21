@@ -25,7 +25,7 @@ public:
         Grafo(); // Construtor vazio
         ~Grafo(); // Destrutor
 
-    void importar(); // Importa o grafo de um arquivo
+    void importar(string nomeArquivo_param); // Importa o grafo de um arquivo
 
     void criarVazio(int numDeVertices_param, bool Direcionado); // Cria um grafo vazio
 

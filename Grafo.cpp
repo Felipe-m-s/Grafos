@@ -32,22 +32,79 @@ bool Grafo::isVerticeValido(int u)
 }
 
 //* Construtor e Destrutor
-Grafo::Grafo() : numDeVertices(0), numDeArestas(0), direcionado(false) {} // Construtor vazio
+Grafo::Grafo() : numDeVertices(0), numDeArestas(0), direcionado(false), matrizDeAdjacencias(nullptr), coordenadasX(nullptr), coordenadasY(nullptr) {} // Construtor vazio
 Grafo::~Grafo()
 {
     liberarMatrizDeAdjacencias();
 } // Destrutor
 
-void Grafo::importar()
+void Grafo::importar(string nomeArquivo_param)
 {
-    ifstream arq("grafo.txt");
+    // Abre o arquivo para leitura
+    ifstream arq(nomeArquivo_param);
     if (!arq.is_open())
     {
         cout << "Erro ao abrir o arquivo!" << endl;
         return;
     }
-    arq >> direcionado;
-    arq >> numDeVertices;
+
+    string tipoDeGrafo;
+
+    // Lê o tipo de grafo (direcionado ou nao direcionado)
+    if (!(arq >> tipoDeGrafo))
+    {
+        cout << "Erro ao ler o tipo de grafo!" << endl;
+        arq.close();
+        return;
+    }
+
+    // Converte a string lida para booleano
+    direcionado = (tipoDeGrafo == "direcionado=sim" || tipoDeGrafo == "direcionado=SIM");
+
+    // Lê o número de vértices
+    if (!(arq >> numDeVertices))
+    {
+        cout << "Erro ao ler o numero de vertices!" << endl;
+        arq.close();
+        return;
+    }
+
+    // Cria o grafo vazio com o número de vértices lido
+    criarVazio(numDeVertices, direcionado);
+    cout << "Grafo criado com " << numDeVertices << " vertices." << endl;
+
+    // Lê as coordenadas dos vértices
+    cout << "Lendo coordenadas dos vertices..." << endl;
+    for (int i = 0; i < numDeVertices; ++i)
+    {
+        int u, x, y;
+        if (!(arq >> u >> x >> y))
+        {
+            cout << "Erro ao ler as coordenadas do vertice " << i << "!" << endl;
+            arq.close();
+            return;
+        }
+        editarCoordenadaDoVertice(u, x, y);
+    }
+    cout << "Coordenadas dos vertices lidas com sucesso." << endl;
+
+    // Lê as arestas
+    cout << "Lendo arestas..." << endl;
+    int arestasEsperadas, u, v, p;
+    if (!(arq >> arestasEsperadas))
+    {
+        cout << "Erro ao ler o numero de arestas!" << endl;
+        arq.close();
+        return;
+    }
+
+    while (arq >> u >> v >> p)
+    {
+        inserAresta(u, v, p);
+    }
+
+    cout << "Importacao concluida com sucesso." << endl;
+    arq.close();
 }
 
 void Grafo::criarVazio(int numDeVertices_param, bool Direcionado)
