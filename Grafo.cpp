@@ -38,6 +38,7 @@ Grafo::~Grafo()
     liberarMatrizDeAdjacencias();
 } // Destrutor
 
+//* Métodos públicos
 void Grafo::importar(string nomeArquivo_param)
 {
     // Abre o arquivo para leitura
