@@ -90,7 +90,7 @@ int main()
             break;
         case 8:
             meuGrafo.exportarArquivoJson();
-            cout << "Grafo exportado para Grafo.json. Use uma ferramenta externa para visualizar." << endl;
+            cout << "Grafo exportado para Grafo.json." << endl;
             break;
         case 9:
             cout << "Saindo do programa." << endl;
