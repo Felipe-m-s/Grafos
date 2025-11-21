@@ -92,6 +92,7 @@ int main()
         case 8:
             meuGrafo.exportarArquivoJson();
             cout << "Grafo exportado para Grafo.json." << endl;
+            system("start Grafo.html"); // Abre o arquivo HTML no navegador padrão
             break;
         case 9:
             cout << "Saindo do programa." << endl;
