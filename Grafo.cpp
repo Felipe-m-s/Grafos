@@ -235,6 +235,19 @@ int Grafo::primeiroAdjacenteDoVertice(int u)
 
 int Grafo::proximoAdjacenteDoVertice(int u, int atual)
 {
+    if (!isVerticeValido(u) || !isVerticeValido(atual))
+    {
+        cout << "Vertices invalidos!" << endl;
+        return -1;
+    }
+    for (int v = atual + 1; v < numDeVertices; v++)
+    {
+        if (matrizDeAdjacencias[u][v] != 0)
+        {
+            return v;
+        }
+    }
+    return -1; // Nenhum adjacente encontrado
 }
 
 void Grafo::listaCompletaDeAdjacentesDoVertice(int u)
