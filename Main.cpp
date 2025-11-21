@@ -22,6 +22,8 @@ int main()
     }
 
     meuGrafo.listaCompletaDeAdjacentesDoVertice(2);
+    meuGrafo.exportar();
+    
 
     return 0;
 }

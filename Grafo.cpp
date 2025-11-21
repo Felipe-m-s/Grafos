@@ -263,7 +263,7 @@ void Grafo::listaCompletaDeAdjacentesDoVertice(int u)
     while (v != -1)
     {
         int peso = matrizDeAdjacencias[u][v];
-        cout << "(" << u << ", " << v << ")" << " com peso " << peso << "; ";
+        cout << "(" << u << ", " << v << ")" << " com peso " << peso << "; " << endl;
 
         v = proximoAdjacenteDoVertice(u, v);
     }
@@ -271,6 +271,39 @@ void Grafo::listaCompletaDeAdjacentesDoVertice(int u)
 
 void Grafo::exportar()
 {
+    ofstream arq("Grafo_Exportado.txt");
+    if (!arq.is_open())
+    {
+        cout << "Erro ao abrir o arquivo para exportacao!" << endl;
+        return;
+    }
+
+    arq << (direcionado ? "direcionado=sim" : "direcionado=nao") << endl;
+    arq << numDeVertices << endl;
+
+    for (int i = 0; i < numDeVertices; ++i)
+    {
+        arq << i << " " << coordenadasX[i] << " " << coordenadasY[i] << endl;
+    }
+
+    arq << numDeArestas << endl;
+
+    for (int u = 0; u < numDeVertices; u++)
+    {
+        for (int v = 0; v < numDeVertices; v++)
+        {
+            if (matrizDeAdjacencias[u][v] != 0)
+            {
+                if (direcionado || (u < v))
+                {
+                    arq << u << " " << v << " " << matrizDeAdjacencias[u][v] << endl;
+                }
+                
+            }
+        }
+    }
+    arq.close();
+    cout << "Grafo exportado com sucesso para Grafo_Exportado.txt" << endl;
 }
 
 void Grafo::mostrarGraficamente()
