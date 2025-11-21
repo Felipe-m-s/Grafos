@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib> // Para usar system()
 #include "Grafo.hpp"
 
 using namespace std;
