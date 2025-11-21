@@ -306,6 +306,46 @@ void Grafo::exportar()
     cout << "Grafo exportado com sucesso para Grafo_Exportado.txt" << endl;
 }
 
-void Grafo::mostrarGraficamente()
+void Grafo::mostrarJson()
 {
+    ofstream arq("Grafo.json");
+    if (!arq.is_open())
+    {
+        cout << "Erro ao abrir o arquivo para exportacao JSON!" << endl;
+        return;
+    }
+    arq << "{" << endl;
+    arq << "  \"vertices\": [" << endl;
+    for (int i = 0; i < numDeVertices; ++i)
+    {
+        arq << "    { \"id\": " << i << ", \"x\": " << coordenadasX[i] << ", \"y\": " << coordenadasY[i] << " }";
+        if (i < numDeVertices - 1)
+            arq << ",";
+        arq << endl;
+    }
+    arq << "  ]," << endl;
+    arq << "  \"arestas\": [" << endl;
+    bool primeiraAresta = true;
+    for (int u = 0; u < numDeVertices; ++u)
+    {
+        for (int v = 0; v < numDeVertices; ++v)
+        {
+            if (matrizDeAdjacencias[u][v] != 0)
+            {
+                if (direcionado || (u < v))
+                {
+                    if (!primeiraAresta)
+                    {
+                        arq << "," << endl;
+                    }
+                    arq << "    { \"de\": " << u << ", \"para\": " << v << ", \"peso\": " << matrizDeAdjacencias[u][v] << " }";
+                    primeiraAresta = false;
+                }
+            }
+        }
+    }
+    arq << endl << "  ]" << endl;
+    arq << "}" << endl;
+    arq.close();
+    cout << "Grafo exportado com sucesso para Grafo.json" << endl;
 }

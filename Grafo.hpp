@@ -47,7 +47,7 @@ public:
 
     void exportar(); // Exporta o grafo para um arquivo
 
-    void mostrarGraficamente(); // Mostra o grafo graficamente
+    void mostrarJson(); // Mostra o grafo graficamente
 };
 
 #endif // GRAFO_HPP
