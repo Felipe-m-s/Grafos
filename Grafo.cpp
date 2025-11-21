@@ -122,6 +122,13 @@ void Grafo::removerAresta(int u, int v)
 
 void Grafo::editarCoordenadaDoVertice(int u, int x, int y)
 {
+    if (!isVerticeValido(u))
+    {
+        cout << "Vertice invalido!" << endl;
+        return;
+    }
+    coordenadasX[u] = x;
+    coordenadasY[u] = y;
 }
 
 int Grafo::primeiroAdjacenteDoVertice(int u)
