@@ -21,5 +21,7 @@ int main()
         v = meuGrafo.proximoAdjacenteDoVertice(u, v);
     }
 
+    meuGrafo.listaCompletaDeAdjacentesDoVertice(2);
+
     return 0;
 }

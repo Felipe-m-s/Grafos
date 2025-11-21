@@ -202,7 +202,6 @@ void Grafo::removerAresta(int u, int v)
 
     numDeArestas--;
     cout << "Aresta removida entre " << u << " e " << v << "." << endl;
-
 }
 
 void Grafo::editarCoordenadaDoVertice(int u, int x, int y)
@@ -252,6 +251,21 @@ int Grafo::proximoAdjacenteDoVertice(int u, int atual)
 
 void Grafo::listaCompletaDeAdjacentesDoVertice(int u)
 {
+    if (!isVerticeValido(u))
+    {
+        cout << "Vertice invalido!" << endl;
+        return;
+    }
+
+    cout << "Adjacentes do vertice " << u << ": ";
+    int v = primeiroAdjacenteDoVertice(u);
+    while (v != -1)
+    {
+        int peso = matrizDeAdjacencias[u][v];
+        cout << "(" << u << ", " << v << ")" << " com peso " << peso << "; ";
+
+        v = proximoAdjacenteDoVertice(u, v);
+    }
 }
 
 void Grafo::exportar()
