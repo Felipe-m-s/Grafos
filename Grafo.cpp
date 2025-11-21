@@ -58,6 +58,8 @@ void Grafo::criarVazio(int numDeVertices_param, bool Direcionado)
         return;
     }
 
+    liberarMatrizDeAdjacencias();
+
     this->numDeVertices = numDeVertices_param;
     this->direcionado = Direcionado;
     this->matrizDeAdjacencias = new int *[numDeVertices];
@@ -87,7 +89,7 @@ void Grafo::exibirTodasAsAdjacencias()
     }
 }
 
-bool consultarSeAdjacente(int u, int v)
+bool Grafo::consultarSeAdjacente(int u, int v)
 {
 }
 
@@ -114,30 +116,30 @@ void Grafo::inserAresta(int u, int v, int p)
     cout << "Aresta inserida entre " << u << " e " << v << " com peso " << p << "." << endl;
 }
 
-void removerAresta(int u, int v)
+void Grafo::removerAresta(int u, int v)
 {
 }
 
-void editarCoordenadaDoVertice(int u, int x, int y)
+void Grafo::editarCoordenadaDoVertice(int u, int x, int y)
 {
 }
 
-int primeiroAdjacenteDoVertice(int u)
+int Grafo::primeiroAdjacenteDoVertice(int u)
 {
 }
 
-int proximoAdjacenteDoVertice(int u, int atual)
+int Grafo::proximoAdjacenteDoVertice(int u, int atual)
 {
 }
 
-void listaCompletaDeAdjacentesDoVertice(int u)
+void Grafo::listaCompletaDeAdjacentesDoVertice(int u)
 {
 }
 
-void exportar()
+void Grafo::exportar()
 {
 }
 
-void mostrarGraficamente()
+void Grafo::mostrarGraficamente()
 {
 }
