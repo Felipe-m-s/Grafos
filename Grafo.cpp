@@ -218,6 +218,19 @@ void Grafo::editarCoordenadaDoVertice(int u, int x, int y)
 
 int Grafo::primeiroAdjacenteDoVertice(int u)
 {
+    if (!isVerticeValido(u))
+    {
+        cout << "Vertice invalido!" << endl;
+        return -1;
+    }
+    for (int v = 0; v < numDeVertices; v++)
+    {
+        if (matrizDeAdjacencias[u][v] != 0)
+        {
+            return v;
+        }
+    }
+    return -1; // Nenhum adjacente encontrado
 }
 
 int Grafo::proximoAdjacenteDoVertice(int u, int atual)
