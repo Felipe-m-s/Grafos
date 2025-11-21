@@ -181,6 +181,28 @@ void Grafo::inserAresta(int u, int v, int p)
 
 void Grafo::removerAresta(int u, int v)
 {
+    if (!isVerticeValido(u) || !isVerticeValido(v))
+    {
+        cout << "Vertices invalidos!" << endl;
+        return;
+    }
+
+    if (matrizDeAdjacencias[u][v] == 0)
+    {
+        cout << "Aresta inexistente entre " << u << " e " << v << "." << endl;
+        return;
+    }
+
+    matrizDeAdjacencias[u][v] = 0;
+
+    if (!direcionado)
+    {
+        matrizDeAdjacencias[v][u] = 0;
+    }
+
+    numDeArestas--;
+    cout << "Aresta removida entre " << u << " e " << v << "." << endl;
+
 }
 
 void Grafo::editarCoordenadaDoVertice(int u, int x, int y)
