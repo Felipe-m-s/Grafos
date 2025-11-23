@@ -315,6 +315,7 @@ void Grafo::exportarArquivoJson()
         return;
     }
     arq << "{" << endl;
+    arq << "  \"direcionado\": " << (direcionado ? "true" : "false") << "," << endl;
     arq << "  \"vertices\": [" << endl;
     for (int i = 0; i < numDeVertices; ++i)
     {
