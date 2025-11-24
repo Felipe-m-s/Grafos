@@ -2,6 +2,14 @@
 const nomeDoArquivoDeGrafo = "Grafo.json";
 
 async function carregarDesenharGrafo() {
+    // Busca o container no DOM
+    const container = document.getElementById('cy'); 
+
+    if (!container) {
+        console.error("Erro: O elemento container (id='cy') não foi encontrado no HTML.");
+        return;
+    }
+    
     try {
         const resposta = await fetch(nomeDoArquivoDeGrafo);
         if (!resposta.ok) {
@@ -9,44 +17,95 @@ async function carregarDesenharGrafo() {
         }
 
         const dadosDoGrafo = await resposta.json();
+        const isDirected = dadosDoGrafo.isDirected || false;
 
-        const vertices = dadosDoGrafo.vertices.map(v => ({
-            group: 'vertices',
+        // 1. Mapeamento de Nós: Lendo 'dadosDoGrafo.nodes'
+        const nodes = dadosDoGrafo.nodes.map(v => ({
+            group: 'nodes',
             data: {
-                id: v.id,
+                id: String(v.id),
+            },
+
+            position: {
                 x: v.x,
                 y: v.y
             }
+
         }));
 
-        const arestas = dadosDoGrafo.arestas.map((a, index) => ({
-            group: 'arestas',
+        // 2. Mapeamento de Arestas: Lendo 'dadosDoGrafo.edges'
+        const edges = dadosDoGrafo.edges.map((a, index) => ({
+            group: 'edges',
             data: {
-                id: `a${index}`,
-                de: a.de,
-                para: a.para,
+                id: `e${index}`,
+                source: String(a.de),
+                target: String(a.para),
                 peso: a.peso,
                 label: String(a.peso)
             }
         }));
 
-        const elementos = vertices.concat(arestas);
+        const elementos = nodes.concat(edges);
 
         var cy = cytoscape({
             container: container,
             elements: elementos,
+
             layout: {
-                name: 'cose',
-                seed: 42,
-                animade: false,
-                paddinf: 30
+                name: 'preset',
+                padding: 30
             },
-        
+            
+            style : [
+                {
+                    selector: 'node',
+                    style: {
+                        'background-color': '#0074D9',
+                        'label': 'data(id)',
+                        'text-valign': 'center',
+                        'color': '#fff',
+                        'text-outline-width': 2,
+                        'text-outline-color': '#0074D9',
+                        'width': '8px',
+                        'height': '8px',
+                        'font-size': '4px'
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'width': 0.5,
+                        'line-color': '#ccc',
+                        'target-arrow-color': '#ccc',
+                        // Se 'isDirected' for false, a seta é 'none'
+                        'target-arrow-shape': isDirected ? 'triangle' : 'none', 
+                        'label': 'data(label)',
+                        'font-size': 3,
+                        'text-rotation': 'autorotate',
+                        'color': '#555',
+                        'text-background-color': '#fff',
+                        'text-background-opacity': 0.7,
+                        'text-background-padding': 2
+                    }
+                }
+            ]
+        });
+
+        cy.userPanningEnabled(false); // Desabilita o pan com o mouse
+
+        cy.on('tap', 'node', function(evt){
+            var node = evt.target;
+            alert('Nó clicado: ' + node.id() + '\nCoordenadas: (' + node.position('x') + ', ' + node.position('y') + ')');
         });
 
     } catch (erro) {
         console.error("Erro ao carregar o grafo:", erro);
-        container.innerHTML = "<h3>Erro ao carregar o grafo.</h3>";
+        if (container) {
+            container.innerHTML = `<h3> Erro ao carregar o grafo. Detalhe: ${erro.message}</h3>`;
+        }
         return;
     }
 }
+
+document.addEventListener('DOMContentLoaded', carregarDesenharGrafo);
+

@@ -315,8 +315,8 @@ void Grafo::exportarArquivoJson()
         return;
     }
     arq << "{" << endl;
-    arq << "  \"direcionado\": " << (direcionado ? "true" : "false") << "," << endl;
-    arq << "  \"vertices\": [" << endl;
+    arq << "  \"isDirected\": " << (direcionado ? "true" : "false") << "," << endl;
+    arq << "  \"nodes\": [" << endl;
     for (int i = 0; i < numDeVertices; ++i)
     {
         arq << "    { \"id\": " << i << ", \"x\": " << coordenadasX[i] << ", \"y\": " << coordenadasY[i] << " }";
@@ -325,7 +325,7 @@ void Grafo::exportarArquivoJson()
         arq << endl;
     }
     arq << "  ]," << endl;
-    arq << "  \"arestas\": [" << endl;
+    arq << "  \"edges\": [" << endl;
     bool primeiraAresta = true;
     for (int u = 0; u < numDeVertices; ++u)
     {
