@@ -1,0 +1,10 @@
+#cy {
+    width: 800px;
+    height: 600px;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+}
+
+h1 {
+    text-align: center;
+}
