@@ -308,13 +308,20 @@ void Grafo::exportar()
 
 void Grafo::exportarArquivoJson()
 {
-    ofstream arq("Grafo.json");
+    ofstream arq("Grafo.html");
+    ifstream arqL("Grafo_base.html");
+
+    
     if (!arq.is_open())
     {
         cout << "Erro ao abrir o arquivo para exportacao JSON!" << endl;
         return;
     }
-    arq << "{" << endl;
+    
+    arq << arqL.rdbuf();
+    arq << endl;
+    arq << "<script>" << endl;
+    arq << "const graphData = {" << endl;
     arq << "  \"isDirected\": " << (direcionado ? "true" : "false") << "," << endl;
     arq << "  \"nodes\": [" << endl;
     for (int i = 0; i < numDeVertices; ++i)
@@ -347,6 +354,7 @@ void Grafo::exportarArquivoJson()
     }
     arq << endl << "  ]" << endl;
     arq << "}" << endl;
+    arq << "</script>" << endl;
     arq.close();
     cout << "Grafo exportado com sucesso para Grafo.json" << endl;
 }

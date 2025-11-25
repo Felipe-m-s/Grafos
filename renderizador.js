@@ -11,12 +11,14 @@ async function carregarDesenharGrafo() {
     }
     
     try {
-        const resposta = await fetch(nomeDoArquivoDeGrafo);
-        if (!resposta.ok) {
-            throw new Error(`Erro ao carregar o arquivo: ${resposta.statusText}`);
-        }
+        // const resposta = await fetch(nomeDoArquivoDeGrafo);
+        // if (!resposta.ok) {
+        //     throw new Error(`Erro ao carregar o arquivo: ${resposta.statusText}`);
+        // }
 
-        const dadosDoGrafo = await resposta.json();
+        //const dadosDoGrafo = await resposta.json();
+        const dadosDoGrafo = graphData;
+
         const isDirected = dadosDoGrafo.isDirected || false;
 
         // 1. Mapeamento de Nós: Lendo 'dadosDoGrafo.nodes'
