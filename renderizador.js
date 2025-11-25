@@ -11,15 +11,11 @@ async function carregarDesenharGrafo() {
     }
     
     try {
-        // const resposta = await fetch(nomeDoArquivoDeGrafo);
-        // if (!resposta.ok) {
-        //     throw new Error(`Erro ao carregar o arquivo: ${resposta.statusText}`);
-        // }
-
-        //const dadosDoGrafo = await resposta.json();
+        
         const dadosDoGrafo = graphData;
 
         const isDirected = dadosDoGrafo.isDirected || false;
+        
 
         // 1. Mapeamento de Nós: Lendo 'dadosDoGrafo.nodes'
         const nodes = dadosDoGrafo.nodes.map(v => ({
@@ -78,10 +74,11 @@ async function carregarDesenharGrafo() {
                     selector: 'edge',
                     style: {
                         'width': 0.5,
-                        'line-color': 'F8F8F2',
-                        'target-arrow-color': '#ccc',
+                        'line-color': '#F8F8F2',
+                        'target-arrow-color': '#50FA7B',
                         // Se 'isDirected' for false, a seta é 'none'
                         'target-arrow-shape': isDirected ? 'triangle' : 'none', 
+                        'curve-style': 'bezier',
                         'label': 'data(label)',
                         'font-size': 3,
                         'text-rotation': 'autorotate',
