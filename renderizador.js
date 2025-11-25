@@ -62,30 +62,31 @@ async function carregarDesenharGrafo() {
                 {
                     selector: 'node',
                     style: {
-                        'background-color': '#0074D9',
+                        'background-color': '#BD93F9',
                         'label': 'data(id)',
                         'text-valign': 'center',
                         'color': '#fff',
                         'text-outline-width': 2,
-                        'text-outline-color': '#0074D9',
+                        'text-outline-color': '#BD93F9',
                         'width': '8px',
                         'height': '8px',
-                        'font-size': '4px'
+                        'font-size': '4px',
+                        'border-color': '#8BE9FD',
                     }
                 },
                 {
                     selector: 'edge',
                     style: {
                         'width': 0.5,
-                        'line-color': '#ccc',
+                        'line-color': 'F8F8F2',
                         'target-arrow-color': '#ccc',
                         // Se 'isDirected' for false, a seta é 'none'
                         'target-arrow-shape': isDirected ? 'triangle' : 'none', 
                         'label': 'data(label)',
                         'font-size': 3,
                         'text-rotation': 'autorotate',
-                        'color': '#555',
-                        'text-background-color': '#fff',
+                        'color': '#50FA7B',
+                        'text-background-color': '#282A36',
                         'text-background-opacity': 0.7,
                         'text-background-padding': 2
                     }
