@@ -87,7 +87,7 @@ async function carregarDesenharGrafo() {
                         'text-rotation': 'autorotate',
                         'color': '#50FA7B',
                         'text-background-color': '#282A36',
-                        'text-background-opacity': 0.7,
+                        //'text-background-opacity': 0.7,
                         'text-background-padding': 2
                     }
                 }
