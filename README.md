@@ -89,6 +89,33 @@ Em seguida, execute o binário gerado e interaja com o menu de opções interati
 
 Encontre o executável dentro da pasta, execute-o e interaja com o menu que irá abrir.
 
+## 📥 Formato do Arquivo de Entrada
+
+Exemplo:
+```texto
+direcionado=nao
+5
+0 100 200
+1 300 200
+2 200 400
+3 400 400
+4 500 200
+6
+0 1 10
+1 2 5
+2 3 8
+3 4 12
+4 0 7
+1 3 6
+```
+
+Formato:
+- 1ª linha → tipo do grafo (direcionado=sim/direcionado=nao)
+- 2ª linha → número de vértices
+- Próximas linhas → vértice x y
+- Depois → número de arestas
+- Em seguida → u v peso
+
 ## 🤝 Contribuições
 Sinta-se à vontade para sugerir melhorias, corrigir bugs ou implementar os próximos algoritmos.
 
