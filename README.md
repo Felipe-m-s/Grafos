@@ -114,6 +114,13 @@ Formato:
 - Depois → número de arestas
 - Em seguida → u v peso
 
+## 🖼️ Visualização do Grafo
+
+Ao selecionar a **opção 13 no menu**, o sistema:
+- Gera o arquivo Grafo.html
+- Abre automaticamente no navegador
+- Permite visualizar vértices, arestas, pesos e direção
+
 ## 🤝 Contribuições
 Sinta-se à vontade para sugerir melhorias, corrigir bugs ou implementar os próximos algoritmos.
 
