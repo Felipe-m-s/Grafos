@@ -45,7 +45,6 @@ com um diferencial crucial: a capacidade de exportar o grafo para uma interface 
  ├── Grafo_base.html
  ├── Grafo.cpp
  ├── Grafo.hpp
- ├── Grafo.html
  ├── LICENSE
  ├── Main.cpp
  ├── meu_grafo_direcionado.txt
@@ -59,7 +58,6 @@ com um diferencial crucial: a capacidade de exportar o grafo para uma interface 
 - **Grafo.cpp** → Implementação dos métodos do grafo  
 - **Main.cpp** → Programa principal  
 - **Grafo_base.html** → Estrutura base da visualização  
-- **Grafo.html** → Página gerada com o grafo  
 - **renderizador.js** → Script de renderização  
 - **styles.css** → Estilos da interface  
 - **Dados.txt / meu_grafo_*.txt** → Arquivos de entrada  
