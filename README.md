@@ -4,6 +4,7 @@
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![License](https://img.shields.io/badge/License-MIT-2ECC71?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Em%20Andamento-FFA500?style=for-the-badge)
 
 Trabalho prático da disciplina de **Algoritmos e Estruturas de Dados III (AEDS III)**.
 
@@ -120,6 +121,23 @@ Ao selecionar a **opção 13 no menu**, o sistema:
 - Gera o arquivo Grafo.html
 - Abre automaticamente no navegador
 - Permite visualizar vértices, arestas, pesos e direção
+
+## 🚀 Próximos Passos e Futuras Funcionalidades
+
+### ⚙️ Manipulação e Edição de Dados do Vértice
+* Ajustar a funcionalidade de importação de grafo para que ela também **leia e armazene os nomes dos vértices**.
+* Implementar a funcionalidade de **edição dos nomes dos vértices.
+* Garantir que o formato de importação/exportação inclua o índice, coordenada (x, y) e o nome do vértice.
+
+### 🧩 Implementação de Algoritmos Clássicos
+* **Busca em Profundidade (DFS):** Implementar o algoritmo e gerar saídas textuais para o usuário acompanhar o processo.
+* **Busca em Largura (BFS):** Implementar o algoritmo e gerar saídas textuais para o usuário acompanhar o processo.
+* **Árvore Geradora Mínima (AGM):** Implementar um algoritmo (Kruskal ou Prim), gerando informações textuais para acompanhamento e resultado
+* **Menor Caminho (Dijkstra):** Implementar o algoritmo de menor caminho, permitindo ao usuário calcular e visualizar textualmente o menor caminho entre um par de vértices, digitando o nome deles.
+
+### ✨ Visualização (Possível Implementação)
+* **Exibir o grafo e os resultados dos algoritmos de forma visual**.
+* Exibir a execução e os **resultados dos algoritmos de forma visual com animação**.
 
 ## 🤝 Contribuições
 Sinta-se à vontade para sugerir melhorias, corrigir bugs ou implementar os próximos algoritmos.
