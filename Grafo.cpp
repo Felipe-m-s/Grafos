@@ -32,7 +32,7 @@ bool Grafo::isVerticeValido(int u)
 }
 
 //* Construtor e Destrutor
-Grafo::Grafo() : numDeVertices(0), numDeArestas(0), direcionado(false), matrizDeAdjacencias(nullptr), coordenadasX(nullptr), coordenadasY(nullptr) {} // Construtor vazio
+Grafo::Grafo() : numDeVertices(0), numDeArestas(0), direcionado(false), matrizDeAdjacencias(nullptr), coordenadasX(nullptr), coordenadasY(nullptr), nomeVertices(nullptr) {} // Construtor vazio
 Grafo::~Grafo()
 {
     liberarMatrizDeAdjacencias();
@@ -74,18 +74,22 @@ void Grafo::importar(string nomeArquivo_param)
     criarVazio(numDeVertices, direcionado);
     cout << "Grafo criado com " << numDeVertices << " vertices." << endl;
 
-    // Lê as coordenadas dos vértices
-    cout << "Lendo coordenadas dos vertices..." << endl;
+    // Lê as coordenadas e o nome dos vértices
+    cout << "Lendo coordenadas e nome dos vertices..." << endl;
     for (int i = 0; i < numDeVertices; ++i)
     {
         int u, x, y;
-        if (!(arq >> u >> x >> y))
+        char n[100];
+        if (!(arq >> u >> x >> y >> ws))
         {
-            cout << "Erro ao ler as coordenadas do vertice " << i << "!" << endl;
+            cout << "Erro ao ler as coordenadas e o nome do vertice " << i << "!" << endl;
             arq.close();
             return;
         }
+        arq.getline(n, 100);
+        arq >> ws;
         editarCoordenadaDoVertice(u, x, y);
+        editarNomeDoVertice(u, n);
     }
     cout << "Coordenadas dos vertices lidas com sucesso." << endl;
 
@@ -128,6 +132,7 @@ void Grafo::criarVazio(int numDeVertices_param, bool Direcionado)
     }
     this->coordenadasX = new int[numDeVertices]{0};
     this->coordenadasY = new int[numDeVertices]{0};
+    this->nomeVertices = new string[numDeVertices]{""};
 }
 void Grafo::exibirTodasAsAdjacencias()
 {
@@ -216,6 +221,16 @@ void Grafo::editarCoordenadaDoVertice(int u, int x, int y)
     coordenadasY[u] = y;
 }
 
+void Grafo::editarNomeDoVertice(int u, string nome)
+{
+    if (!isVerticeValido(u))
+    {
+        cout << "Vertice invalido!" << endl;
+        return;
+    }
+    nomeVertices[u] = nome;
+}
+
 int Grafo::primeiroAdjacenteDoVertice(int u)
 {
     if (!isVerticeValido(u))
@@ -283,7 +298,7 @@ void Grafo::exportar()
 
     for (int i = 0; i < numDeVertices; ++i)
     {
-        arq << i << " " << coordenadasX[i] << " " << coordenadasY[i] << endl;
+        arq << i << " " << coordenadasX[i] << " " << coordenadasY[i] << " " << nomeVertices[i] << endl;
     }
 
     arq << numDeArestas << endl;

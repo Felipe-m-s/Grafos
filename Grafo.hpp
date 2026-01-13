@@ -17,6 +17,7 @@ private:
     int *coordenadasX;
     int *coordenadasY;
     bool direcionado;
+    string *nomeVertices;
 
     void liberarMatrizDeAdjacencias(); // Libera a memória alocada para a matriz de adjacências
     bool isVerticeValido(int u); // Verifica se o vértice é válido
@@ -38,6 +39,8 @@ public:
     void removerAresta(int u, int v); // Remove a aresta entre os vértices u e v
 
     void editarCoordenadaDoVertice(int u, int x, int y); // Edita as coordenadas do vértice u
+
+    void editarNomeDoVertice(int u, string nome); // Edita o nome do vértice u
 
     int primeiroAdjacenteDoVertice(int u); // Retorna o primeiro adjacente do vértice u
 
