@@ -23,11 +23,12 @@ void imprimirMenu()
     cout << "6. Inserir arestas em conjunto" << endl;
     cout << "7. Remover aresta" << endl;
     cout << "8. Editar coordenada do vertice" << endl;
-    cout << "9. Consultar o primeiro adjacente" << endl;
-    cout << "10. Consultar o proximo adjacente" << endl;
-    cout << "11. Consultar lista de adjacentes" << endl;
-    cout << "12. Exportar grafo para arquivo" << endl;
-    cout << "13. Visualizar grafo graficamente" << endl;
+    cout << "9. Editar nome do vertice" << endl;
+    cout << "10. Consultar o primeiro adjacente" << endl;
+    cout << "11. Consultar o proximo adjacente" << endl;
+    cout << "12. Consultar lista de adjacentes" << endl;
+    cout << "13. Exportar grafo para arquivo" << endl;
+    cout << "14. Visualizar grafo graficamente" << endl;
     cout << "0. Sair" << endl;
     cout << "Escolha uma opcao: ";
 }
@@ -121,6 +122,17 @@ int main()
         case 9:
         {
             int u;
+            string nome;
+            cout << "Digite o vertice e seu novo nome (u nome): ";
+            cin >> u;
+            cin.ignore(); // Limpa o buffer do cin
+            getline(cin, nome);
+            meuGrafo.editarNomeDoVertice(u, nome);
+            break;
+        }
+        case 10:
+        {
+            int u;
             cout << "Digite o vertice para consultar o primeiro adjacente (u): ";
             cin >> u;
             int primeiroAdj = meuGrafo.primeiroAdjacenteDoVertice(u);
@@ -130,7 +142,7 @@ int main()
                 cout << "O vertice " << u << " nao possui adjacentes." << endl;
             break;
         }
-        case 10:
+        case 11:
         {
             int u, atual;
             cout << "Digite o vertice e o adjacente atual para consultar o proximo adjacente (u atual): ";
@@ -142,7 +154,7 @@ int main()
                 cout << "Nao ha mais adjacentes para o vertice " << u << " apos " << atual << "." << endl;
             break;
         }
-        case 11:
+        case 12:
         {
             int u;
             cout << "Digite o vertice para consultar a lista completa de adjacentes (u): ";
@@ -150,10 +162,10 @@ int main()
             meuGrafo.listaCompletaDeAdjacentesDoVertice(u);
             break;
         }
-        case 12:
+        case 13:
             meuGrafo.exportar();
             break;
-        case 13:
+        case 14:
             meuGrafo.exportarArquivoJson();
             cout << "Grafo exportado para Grafo.json." << endl;
             system("start Grafo.html"); // Abre o arquivo HTML no navegador padrão
