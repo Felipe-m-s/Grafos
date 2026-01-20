@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -282,6 +283,53 @@ void Grafo::listaCompletaDeAdjacentesDoVertice(int u)
 
         v = proximoAdjacenteDoVertice(u, v);
     }
+}
+
+void Grafo::buscaProfundidade()
+{
+    vector<int> descoberta(numDeVertices);
+    vector<int> termino(numDeVertices);
+    vector<int> antecessor(numDeVertices);
+    vector<char> cor(numDeVertices);
+
+    int tempo = 0;
+
+    for (int u = 0; u < numDeVertices; u++)
+    {
+        cor[u] = 'B'; // Branco
+        antecessor[u] = -1;
+    }
+
+    for (int u = 0; u < numDeVertices; u++)
+    {
+        if (cor[u] == 'B')
+        {
+            visitaProfundidade(u, cor, descoberta, termino, antecessor, tempo);
+        }
+    }
+
+}
+
+void Grafo::visitaProfundidade(int u, vector<char> &cor, vector<int> &descoberta, vector<int> &termino, vector<int> &antecessor, int &tempo)
+{
+    cor[u] = 'C'; // Cinza
+    tempo ++;
+    descoberta[u] = tempo;
+    cout << "Descoberta do vertice " << u << " no tempo " << descoberta[u] << ". Antecessor: " << antecessor[u] << endl;
+
+    for (int v = 0; v < numDeVertices; v++)
+    {
+        if (matrizDeAdjacencias[u][v] != 0 && cor[v] == 'B')
+        {
+            antecessor[v] = u;
+            visitaProfundidade(v, cor, descoberta, termino, antecessor, tempo);
+        }
+    }
+
+    cor[u] = 'P'; // Preto
+    tempo++;
+    termino[u] = tempo;
+    cout << "Vertice: " << u << " terminado no tempo " << termino[u] << endl;
 }
 
 void Grafo::exportar()

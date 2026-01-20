@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -47,6 +48,12 @@ public:
     int proximoAdjacenteDoVertice(int u, int atual); // Retorna o próximo adjacente do vértice u após o vértice atual
 
     void listaCompletaDeAdjacentesDoVertice(int u); // Exibe a lista completa de adjacentes do vértice u
+
+    void buscaProfundidade(); // Realiza busca em profundidade a partir do vértice inicio
+
+    void visitaProfundidade(int u, vector<char> &cor, vector<int> &descoberta, vector<int> &termino, vector<int> &antecessor, int &tempo); // Função auxiliar para busca em profundidade
+
+    void buscaLargura(); // Realiza busca em largura a partir do vértice inicio
 
     void exportar(); // Exporta o grafo para um arquivo
 
