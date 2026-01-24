@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <queue>
 
 using namespace std;
 
@@ -330,6 +331,60 @@ void Grafo::visitaProfundidade(int u, vector<char> &cor, vector<int> &descoberta
     tempo++;
     termino[u] = tempo;
     cout << "Vertice: " << u << " terminado no tempo " << termino[u] << endl;
+}
+
+void Grafo::buscaLargura()
+{
+    vector<int> antecessor(numDeVertices);
+    vector<char> cor(numDeVertices);
+    vector<int> distancia(numDeVertices);
+
+    for (int u = 0; u < numDeVertices; u++)
+    {
+        antecessor[u] = -1;
+        cor[u] = 'B'; // Branco
+        distancia[u] = -1; // Infinito
+    }
+
+    for (int u = 0; u < numDeVertices; u++)
+    {
+        if (cor[u] == 'B')
+        {
+            visitaLargura(u, cor, distancia, antecessor);
+        }
+    }
+}
+
+void Grafo::visitaLargura(int u, vector<char> &cor, vector<int> &distancia, vector<int> &antecessor)
+{
+    cor[u] = 'C'; // Cinza
+    distancia[u] = 0;
+
+    queue<int> fila;
+    fila.push(u);
+
+    cout << "Iniciando busca em largura a partir do vertice " << u << "." << endl;
+    while (!fila.empty())
+    {
+        int v = fila.front();
+        fila.pop();
+        cout << "Visitando vertice " << v << " com distancia " << distancia[v] << "." << endl;
+
+        for (int k = 0; k < numDeVertices; k++)
+        {
+            if (matrizDeAdjacencias[v][k] != 0 && cor[k] == 'B')
+            {
+                cor[k] = 'C'; //Cinza
+                antecessor[k] = v;
+                distancia[k] = distancia[v] + 1;
+                fila.push(k);
+                cout << "Vertice " << k << " descoberto com distancia " << distancia[k] << " e antecessor " << v << "." << endl;
+            }
+        }
+        cor[v] = 'P'; // Preto
+        cout << "Vertice " << v << " completamente explorado." << endl;
+    }
+
 }
 
 void Grafo::exportar()

@@ -28,8 +28,9 @@ void imprimirMenu()
     cout << "11. Consultar o proximo adjacente" << endl;
     cout << "12. Consultar lista de adjacentes" << endl;
     cout << "13. Realizar busca em profundidade" << endl;
-    cout << "14. Exportar grafo para arquivo" << endl;
-    cout << "15. Visualizar grafo graficamente" << endl;
+    cout << "14. Realizar busca em largura" << endl;
+    cout << "15. Exportar grafo para arquivo" << endl;
+    cout << "16. Visualizar grafo graficamente" << endl;
     cout << "0. Sair" << endl;
     cout << "Escolha uma opcao: ";
 }
@@ -168,9 +169,12 @@ int main()
             meuGrafo.buscaProfundidade();
             break;
         case 14:
-            meuGrafo.exportar();
+            meuGrafo.buscaLargura();
             break;
         case 15:
+            meuGrafo.exportar();
+            break;
+        case 16:
             meuGrafo.exportarArquivoJson();
             cout << "Grafo exportado para Grafo.json." << endl;
             system("start Grafo.html"); // Abre o arquivo HTML no navegador padrão

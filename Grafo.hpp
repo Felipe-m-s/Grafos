@@ -55,6 +55,8 @@ public:
 
     void buscaLargura(); // Realiza busca em largura a partir do vértice inicio
 
+    void visitaLargura(int u, vector<char> &cor, vector<int> &distancia, vector<int> &antecessor); // Função auxiliar para busca em largura
+
     void exportar(); // Exporta o grafo para um arquivo
 
     void exportarArquivoJson(); // Método para exportar o grafo em formato JSON
