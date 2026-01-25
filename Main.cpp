@@ -30,8 +30,9 @@ void imprimirMenu()
     cout << "13. Realizar busca em profundidade" << endl;
     cout << "14. Realizar busca em largura" << endl;
     cout << "15. Executar Algoritmo de Prim" << endl;
-    cout << "16. Exportar grafo para arquivo" << endl;
-    cout << "17. Visualizar grafo graficamente" << endl;
+    cout << "16. Executar Algoritmo de Dijkstra" << endl;
+    cout << "17. Exportar grafo para arquivo" << endl;
+    cout << "18. Visualizar grafo graficamente" << endl;
     cout << "0. Sair" << endl;
     cout << "Escolha uma opcao: ";
 }
@@ -177,9 +178,17 @@ int main()
             meuGrafo.Prim();
             break;
         case 16:
+        {
+            int origem;
+            cout << "Digite o vertice de origem para o Algoritmo de Dijkstra: ";
+            cin >> origem;
+            meuGrafo.Dijkstra(origem);
+            break;
+        }
+        case 17:
             meuGrafo.exportar();
             break;
-        case 17:
+        case 18:
             meuGrafo.exportarArquivoJson();
             cout << "Grafo exportado para Grafo.json." << endl;
             system("start Grafo.html"); // Abre o arquivo HTML no navegador padrão

@@ -59,6 +59,8 @@ public:
 
     void Prim(); // Implementa o algoritmo de Prim para encontrar a árvore geradora mínima
 
+    void Dijkstra(int origem); // Implementa o algoritmo de Dijkstra para encontrar o caminho mínimo a partir do vértice origem
+
     void exportar(); // Exporta o grafo para um arquivo
 
     void exportarArquivoJson(); // Método para exportar o grafo em formato JSON

@@ -1,0 +1,50 @@
+direcionado=nao
+20
+0 Sao_Joao_Evangelista
+1 Guanhaes
+2 Sabinopolis
+3 Pecanha
+4 Virginopolis
+5 Cantagalo
+6 Coluna
+7 Paulistas
+8 Materlandia
+9 Gonzaga
+10 Santa_Maria_do_Suacui
+11 Agua_Boa
+12 Sao_Jose_do_Jacuri
+13 Divinolandia_de_Minas
+14 Dom_Joaquim
+15 Itabira
+16 Ferros
+17 Alvorada_de_Minas
+18 Senhora_do_Porto
+19 Carmesia
+27
+0 1 25
+0 2 30
+0 6 18
+1 3 35
+1 4 22
+1 9 28
+2 4 20
+2 5 34
+3 10 42
+3 5 30
+4 5 14
+4 8 17
+5 6 20
+6 7 12
+6 18 16
+7 8 15
+8 9 11
+9 10 33
+10 11 28
+11 12 16
+12 13 20
+13 14 24
+14 15 45
+15 16 22
+16 17 18
+17 18 21
+18 19 14

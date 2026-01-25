@@ -454,6 +454,62 @@ void Grafo::Prim()
     cout << "Peso total da MST: " << pesoTotal << endl;
 }
 
+void Grafo::Dijkstra(int origem)
+{
+    if (!isVerticeValido(origem))
+    {
+        cout << "Vertice de origem invalido!" << endl;
+        return;
+    }
+
+    vector<int> v;
+    vector<int> p(numDeVertices, INT_MAX);
+    vector<int> a(numDeVertices, -1);
+
+    for(int i = 0; i < numDeVertices; i++)
+    {
+        v.push_back(i);
+    }
+
+    p[origem] = 0; // Distância da origem para ela mesma é 0
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> heap;
+    for (int  i = 0; i < numDeVertices; i++)
+    {
+        heap.push({p[i], i});
+    }
+
+    for (int i = 0; i < numDeVertices; i++)
+    {
+        int u = heap.top().second;
+        heap.pop();
+
+        for (int v = 0; v < numDeVertices; v++)
+        {
+            if (matrizDeAdjacencias[u][v] != 0 && p[u] + matrizDeAdjacencias[u][v] < p[v])
+            {
+                p[v] = p[u] + matrizDeAdjacencias[u][v];
+                a[v] = u;
+                heap.push({p[v], v});
+                cout << "Atualizando vertice " << v << ": antecessor = " << u << ", distancia = " << p[v] << endl;
+            }
+        }
+    }
+
+    // Imprimir as distâncias mínimas a partir da origem
+    cout << "\nDistancias minimas a partir do vertice " << origem << ":" << endl;
+    for (int i = 0; i < numDeVertices; i++)
+    {
+        if (p[i] == INT_MAX)
+        {
+            cout << "Vertice " << i << " e inalcancavel a partir de " << origem << "." << endl;
+        }
+        else
+        {
+            cout << "Distancia para o vertice " << i << " e " << p[i] << "." << endl;
+        }
+    }
+}
+
 void Grafo::exportar()
 {
     ofstream arq("Grafo_Exportado.txt");
