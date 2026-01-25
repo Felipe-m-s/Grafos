@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <queue>
+#include <climits> // Para INT_MAX
 
 using namespace std;
 
@@ -385,6 +386,72 @@ void Grafo::visitaLargura(int u, vector<char> &cor, vector<int> &distancia, vect
         cout << "Vertice " << v << " completamente explorado." << endl;
     }
 
+}
+
+void Grafo::Prim()
+{
+    if (numDeVertices == 0)
+    {
+        cout << "Grafo vazio!" << endl;
+        return;
+    }
+
+    vector<int> v;
+    vector<int> p(numDeVertices, INT_MAX);
+    vector<int> a(numDeVertices, -1);
+    vector<bool> inserido(numDeVertices, false);
+
+    for(int i = 0; i < numDeVertices; i++)
+    {
+        v.push_back(i);
+    }
+    
+    p[0] = 0; // Começa do vértice 0
+
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> heap;
+    for (int  i = 0; i < numDeVertices; i++)
+    {
+        heap.push({p[i], i});
+    }
+    
+    while (!heap.empty())
+    {
+        int u = heap.top().second;
+        heap.pop();
+
+        if(inserido[u])
+            continue;
+        
+        inserido[u] = true;
+
+        for (int v = 0; v < numDeVertices; v++)
+        {
+            if(matrizDeAdjacencias[u][v] != 0 && !inserido[v] && matrizDeAdjacencias[u][v] < p[v])
+            {
+                p[v] = matrizDeAdjacencias[u][v];
+                a[v] = u;
+                heap.push({p[v], v});
+                cout << "Atualizando vertice " << v << ": antecessor = " << u << ", peso = " << p[v] << endl;
+
+            }
+        } 
+    }
+
+    // Imprimir a Árvore Geradora Mínima
+    cout << "\nArvore Geradora Minima:" << endl;
+    int pesoTotal = 0;
+    for (int i = 1; i < numDeVertices; i++)
+    {
+        if (a[i] != -1)
+        {
+            int u = a[i];
+            int v = i;
+            int peso = matrizDeAdjacencias[u][v];
+            cout << "Aresta: " << u << " - " << v << " com peso " << peso << endl;
+            pesoTotal += peso;
+        }
+    }
+    cout << "Peso total da MST: " << pesoTotal << endl;
 }
 
 void Grafo::exportar()
