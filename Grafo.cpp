@@ -309,13 +309,12 @@ void Grafo::buscaProfundidade()
             visitaProfundidade(u, cor, descoberta, termino, antecessor, tempo);
         }
     }
-
 }
 
 void Grafo::visitaProfundidade(int u, vector<char> &cor, vector<int> &descoberta, vector<int> &termino, vector<int> &antecessor, int &tempo)
 {
     cor[u] = 'C'; // Cinza
-    tempo ++;
+    tempo++;
     descoberta[u] = tempo;
     cout << "Descoberta do vertice " << u << " no tempo " << descoberta[u] << ". Antecessor: " << antecessor[u] << endl;
 
@@ -343,7 +342,7 @@ void Grafo::buscaLargura()
     for (int u = 0; u < numDeVertices; u++)
     {
         antecessor[u] = -1;
-        cor[u] = 'B'; // Branco
+        cor[u] = 'B';      // Branco
         distancia[u] = -1; // Infinito
     }
 
@@ -375,7 +374,7 @@ void Grafo::visitaLargura(int u, vector<char> &cor, vector<int> &distancia, vect
         {
             if (matrizDeAdjacencias[v][k] != 0 && cor[k] == 'B')
             {
-                cor[k] = 'C'; //Cinza
+                cor[k] = 'C'; // Cinza
                 antecessor[k] = v;
                 distancia[k] = distancia[v] + 1;
                 fila.push(k);
@@ -385,7 +384,6 @@ void Grafo::visitaLargura(int u, vector<char> &cor, vector<int> &distancia, vect
         cor[v] = 'P'; // Preto
         cout << "Vertice " << v << " completamente explorado." << endl;
     }
-
 }
 
 void Grafo::Prim()
@@ -401,40 +399,39 @@ void Grafo::Prim()
     vector<int> a(numDeVertices, -1);
     vector<bool> inserido(numDeVertices, false);
 
-    for(int i = 0; i < numDeVertices; i++)
+    for (int i = 0; i < numDeVertices; i++)
     {
         v.push_back(i);
     }
-    
+
     p[0] = 0; // Começa do vértice 0
 
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> heap;
-    for (int  i = 0; i < numDeVertices; i++)
+    for (int i = 0; i < numDeVertices; i++)
     {
         heap.push({p[i], i});
     }
-    
+
     while (!heap.empty())
     {
         int u = heap.top().second;
         heap.pop();
 
-        if(inserido[u])
+        if (inserido[u])
             continue;
-        
+
         inserido[u] = true;
 
         for (int v = 0; v < numDeVertices; v++)
         {
-            if(matrizDeAdjacencias[u][v] != 0 && !inserido[v] && matrizDeAdjacencias[u][v] < p[v])
+            if (matrizDeAdjacencias[u][v] != 0 && !inserido[v] && matrizDeAdjacencias[u][v] < p[v])
             {
                 p[v] = matrizDeAdjacencias[u][v];
                 a[v] = u;
                 heap.push({p[v], v});
                 cout << "Atualizando vertice " << v << ": antecessor = " << u << ", peso = " << p[v] << endl;
-
             }
-        } 
+        }
     }
 
     // Imprimir a Árvore Geradora Mínima
@@ -454,34 +451,62 @@ void Grafo::Prim()
     cout << "Peso total da MST: " << pesoTotal << endl;
 }
 
-void Grafo::Dijkstra(int origem)
+int Grafo::buscarVerticePorNome(string &nome)
 {
-    if (!isVerticeValido(origem))
+    for (int i = 0; i < numDeVertices; i++)
     {
-        cout << "Vertice de origem invalido!" << endl;
+        if (nomeVertices[i] == nome)
+        {
+            return i;
+        }
+    }
+    return -1; // Vértice não encontrado
+}
+
+void Grafo::imprimirCaminhoComNomes(vector<int>& antecessor, int origem, int destino)
+{
+    int caminho[100];
+    int tamanho = 0;
+
+    for (int v = destino; v != -1; v = antecessor[v])
+        caminho[tamanho++] = v;
+
+    cout << "Caminho minimo:\n";
+    for (int i = tamanho - 1; i >= 0; i--)
+    {
+        cout << nomeVertices[caminho[i]];
+        if (i > 0)
+            cout << " -> ";
+    }
+    cout << endl;
+}
+
+void Grafo::Dijkstra(int origem, int destino)
+{
+    if (!isVerticeValido(origem) || !isVerticeValido(destino))
+    {
+        cout << "Vertices invalidos!" << endl;
         return;
     }
 
-    vector<int> v;
     vector<int> p(numDeVertices, INT_MAX);
     vector<int> a(numDeVertices, -1);
 
-    for(int i = 0; i < numDeVertices; i++)
-    {
-        v.push_back(i);
-    }
-
     p[origem] = 0; // Distância da origem para ela mesma é 0
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> heap;
-    for (int  i = 0; i < numDeVertices; i++)
-    {
-        heap.push({p[i], i});
-    }
+    heap.push({0, origem});
 
     for (int i = 0; i < numDeVertices; i++)
     {
         int u = heap.top().second;
+        int distU = heap.top().first;
         heap.pop();
+
+        if (distU > p[u])
+            continue;
+
+        if (u == destino)
+            break;
 
         for (int v = 0; v < numDeVertices; v++)
         {
@@ -495,19 +520,35 @@ void Grafo::Dijkstra(int origem)
         }
     }
 
-    // Imprimir as distâncias mínimas a partir da origem
-    cout << "\nDistancias minimas a partir do vertice " << origem << ":" << endl;
-    for (int i = 0; i < numDeVertices; i++)
+    // Imprimir distancia minima do vertice origem até o destino
+    if (p[destino] == INT_MAX)
     {
-        if (p[i] == INT_MAX)
-        {
-            cout << "Vertice " << i << " e inalcancavel a partir de " << origem << "." << endl;
-        }
-        else
-        {
-            cout << "Distancia para o vertice " << i << " e " << p[i] << "." << endl;
-        }
+        cout << "O vertice " << destino << " e inalcancavel a partir de " << origem << "." << endl;
+        return;
     }
+
+    cout << "\nMenor distancia de "
+        << nomeVertices[origem]
+        << " ate "
+        << nomeVertices[destino]
+        << " = "
+        << p[destino] << endl;
+
+    imprimirCaminhoComNomes(a, origem, destino);
+}
+
+void Grafo::DijkstraPorNome(string nomeOrigem, string nomeDestino)
+{
+    int origem = buscarVerticePorNome(nomeOrigem);
+    int destino = buscarVerticePorNome(nomeDestino);
+
+    if (origem == -1 || destino == -1)
+    {
+        cout << "Origem ou destino nao encontrado!" << endl;
+        return;
+    }
+
+    Dijkstra(origem, destino);
 }
 
 void Grafo::exportar()
@@ -539,7 +580,6 @@ void Grafo::exportar()
                 {
                     arq << u << " " << v << " " << matrizDeAdjacencias[u][v] << endl;
                 }
-                
             }
         }
     }
@@ -552,13 +592,12 @@ void Grafo::exportarArquivoJson()
     ofstream arq("Grafo.html");
     ifstream arqL("Grafo_base.html");
 
-    
     if (!arq.is_open())
     {
         cout << "Erro ao abrir o arquivo para exportacao JSON!" << endl;
         return;
     }
-    
+
     arq << arqL.rdbuf();
     arq << endl;
     arq << "<script>" << endl;
@@ -593,7 +632,8 @@ void Grafo::exportarArquivoJson()
             }
         }
     }
-    arq << endl << "  ]" << endl;
+    arq << endl
+        << "  ]" << endl;
     arq << "}" << endl;
     arq << "</script>" << endl;
     arq.close();
