@@ -59,7 +59,13 @@ public:
 
     void Prim(); // Implementa o algoritmo de Prim para encontrar a árvore geradora mínima
 
-    void Dijkstra(int origem); // Implementa o algoritmo de Dijkstra para encontrar o caminho mínimo a partir do vértice origem
+    int buscarVerticePorNome(string& nome); // Busca um vértice pelo seu nome e retorna seu índice
+
+    void imprimirCaminhoComNomes(vector<int>& antecessor, int origem, int destino); // Imprime o caminho mínimo usando nomes dos vértices
+    
+    void Dijkstra(int origem, int destino); // Implementa o algoritmo de Dijkstra para encontrar o caminho mínimo a partir do vértice origem
+
+    void DijkstraPorNome(string nomeOrigem, string nomeDestino); // Implementa o algoritmo de Dijkstra para encontrar o caminho mínimo a partir do vértice de nome origem
 
     void exportar(); // Exporta o grafo para um arquivo
 
