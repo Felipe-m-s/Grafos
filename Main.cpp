@@ -179,10 +179,17 @@ int main()
             break;
         case 16:
         {
-            int origem;
-            cout << "Digite o vertice de origem para o Algoritmo de Dijkstra: ";
-            cin >> origem;
-            meuGrafo.Dijkstra(origem);
+            cin.ignore(); // Limpa o buffer do cin
+
+            string origem, destino;
+
+            cout << "Digite o ponto de partida: ";
+            getline(cin, origem);
+
+            cout << "Digite o destino: ";
+            getline(cin, destino);
+
+            meuGrafo.DijkstraPorNome(origem, destino);
             break;
         }
         case 17:
